@@ -1,0 +1,316 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 package javaapplication;\par
+import javax.swing.*;\par
+import java.awt.*;\par
+import java.awt.event.*;\par
+public class Quiz extends JFrame implements ActionListener \{\par
+    \par
+    String questions[][] = new String[10][5];\par
+    String answers[][] = new String[10][2];\par
+    String useranswers[][] = new String[10][1];\par
+\par
+    JLabel qno, question;\par
+     JRadioButton opt1, opt2, opt3, opt4;\par
+     \par
+    ButtonGroup groupoptions;\par
+    JButton next, submit, lifeline;\par
+    \par
+    public static int timer = 15;\par
+    public static int ans_given = 0;\par
+    public static int count = 0;\par
+    public static int score = 0;\par
+    String name;\par
+    Quiz(String name)\{\par
+        this.name = name;\par
+        setBounds(50, 0, 1270, 850);\par
+        getContentPane().setBackground(Color.WHITE);\par
+        setLayout(null);\par
+        \par
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/quiz.jpg"));\par
+        JLabel image = new JLabel(i1);\par
+        image.setBounds(0, 0, 1255, 380);\par
+        add(image);\par
+        \par
+         qno = new JLabel();\par
+        qno.setBounds(100, 450, 50, 30);\par
+        qno.setFont(new Font("Tahoma", Font.PLAIN, 24));\par
+        add(qno);\par
+        \par
+        question = new JLabel();\par
+        question.setBounds(150, 450, 900, 30);\par
+        question.setFont(new Font("Tahoma", Font.PLAIN, 24));\par
+        add(question);\par
+        questions[0][0] = "Which is used to find and fix bugs in the Java programs.?";\par
+        questions[0][1] = "JVM";\par
+        questions[0][2] = "JDB";\par
+        questions[0][3] = "JDK";\par
+        questions[0][4] = "JRE";\par
+\par
+        questions[1][0] = "What is the return type of the hashCode() method in the Object class?";\par
+        questions[1][1] = "int";\par
+        questions[1][2] = "Object";\par
+        questions[1][3] = "long";\par
+        questions[1][4] = "void";\par
+\par
+        questions[2][0] = "Which package contains the Random class?";\par
+        questions[2][1] = "java.util package";\par
+        questions[2][2] = "java.lang package";\par
+        questions[2][3] = "java.awt package";\par
+        questions[2][4] = "java.io package";\par
+\par
+        questions[3][0] = "An interface with no fields or methods is known as?";\par
+        questions[3][1] = "Runnable Interface";\par
+        questions[3][2] = "Abstract Interface";\par
+        questions[3][3] = "Marker Interface";\par
+        questions[3][4] = "CharSequence Interface";\par
+\par
+        questions[4][0] = "In which memory a String is stored, when we create a string using new operator?";\par
+        questions[4][1] = "Stack";\par
+        questions[4][2] = "String memory";\par
+        questions[4][3] = "Random storage space";\par
+        questions[4][4] = "Heap memory";\par
+\par
+        questions[5][0] = "Which of the following is a marker interface?";\par
+        questions[5][1] = "Runnable interface";\par
+        questions[5][2] = "Remote interface";\par
+        questions[5][3] = "Readable interface";\par
+        questions[5][4] = "Result interface";\par
+\par
+        questions[6][0] = "Which keyword is used for accessing the features of a package?";\par
+        questions[6][1] = "import";\par
+        questions[6][2] = "package";\par
+        questions[6][3] = "extends";\par
+        questions[6][4] = "export";\par
+\par
+        questions[7][0] = "In java, jar stands for?";\par
+        questions[7][1] = "Java Archive Runner";\par
+        questions[7][2] = "Java Archive";\par
+        questions[7][3] = "Java Application Resource";\par
+        questions[7][4] = "Java Application Runner";\par
+\par
+        questions[8][0] = "Which of the following is a mutable class in java?";\par
+        questions[8][1] = "java.lang.StringBuilder";\par
+        questions[8][2] = "java.lang.Short";\par
+        questions[8][3] = "java.lang.Byte";\par
+        questions[8][4] = "java.lang.String";\par
+\par
+        questions[9][0] = "Which of the following option leads to the portability and security of Java?";\par
+        questions[9][1] = "Bytecode is executed by JVM";\par
+        questions[9][2] = "The applet makes the Java code secure and portable";\par
+        questions[9][3] = "Use of exception handling";\par
+        questions[9][4] = "Dynamic binding between objects";\par
+        \par
+        answers[0][1] = "JDB";\par
+        answers[1][1] = "int";\par
+        answers[2][1] = "java.util package";\par
+        answers[3][1] = "Marker Interface";\par
+        answers[4][1] = "Heap memory";\par
+        answers[5][1] = "Remote interface";\par
+        answers[6][1] = "import";\par
+        answers[7][1] = "Java Archive";\par
+        answers[8][1] = "java.lang.StringBuilder";\par
+        answers[9][1] = "Bytecode is executed by JVM";\par
+        \par
+  \par
+        opt1 = new JRadioButton();\par
+        opt1.setBounds(170, 520, 700, 30);\par
+        opt1.setBackground(Color.WHITE);\par
+        opt1.setFont(new Font("Dialog", Font.PLAIN, 20));\par
+        add(opt1);\par
+        \par
+         opt2 = new JRadioButton();\par
+        opt2.setBounds(170, 560, 700, 30);\par
+        opt2.setBackground(Color.WHITE);\par
+        opt2.setFont(new Font("Dialog", Font.PLAIN, 20));\par
+        add(opt2);\par
+        \par
+        opt3 = new JRadioButton();\par
+        opt3.setBounds(170, 600, 700, 30);\par
+        opt3.setBackground(Color.WHITE);\par
+        opt3.setFont(new Font("Dialog", Font.PLAIN, 20));\par
+        add(opt3);\par
+        \par
+        opt4 = new JRadioButton();\par
+        opt4.setBounds(170, 640, 700, 30);\par
+        opt4.setBackground(Color.WHITE);\par
+        opt4.setFont(new Font("Dialog", Font.PLAIN, 20));\par
+        add(opt4);\par
+        \par
+       groupoptions = new ButtonGroup();\par
+        groupoptions.add(opt1);\par
+        groupoptions.add(opt2);\par
+        groupoptions.add(opt3);\par
+        groupoptions.add(opt4);\par
+        \par
+      \par
+       next = new JButton("Next");\par
+        next.setBounds(1000, 500, 200, 30);\par
+        next.setFont(new Font("Tahoma", Font.PLAIN, 22));\par
+        next.setBackground(new Color(30, 144, 255));\par
+        next.setForeground(Color.WHITE);\par
+       next.addActionListener(this);\par
+        add(next);\par
+        \par
+            lifeline = new JButton("50-50 Lifeline");\par
+        lifeline.setBounds(1000, 570, 200, 30);\par
+        lifeline.setFont(new Font("Tahoma", Font.PLAIN, 22));\par
+        lifeline.setBackground(new Color(30, 144, 255));\par
+        lifeline.setForeground(Color.WHITE);\par
+        lifeline.addActionListener(this);\par
+        add(lifeline);\par
+        \par
+        submit = new JButton("Submit");\par
+        submit.setBounds(1000, 640, 200, 30);\par
+        submit.setFont(new Font("Tahoma", Font.PLAIN, 22));\par
+        submit.setBackground(new Color(30, 144, 255));\par
+        submit.setForeground(Color.WHITE);\par
+        submit.addActionListener(this);\par
+        submit.setEnabled(false);\par
+        add(submit);\par
+        \par
+       start(count);\par
+        \par
+        setVisible(true);\par
+        \par
+    \}\par
+        public void actionPerformed(ActionEvent ae) \{\par
+        if (ae.getSource() == next) \{\par
+            repaint();\par
+            opt1.setEnabled(true);\par
+            opt2.setEnabled(true);\par
+            opt3.setEnabled(true);\par
+            opt4.setEnabled(true);\par
+            \par
+            ans_given = 1;\par
+            if (groupoptions.getSelection() == null) \{\par
+               useranswers[count][0] = "";\par
+            \} else \{\par
+                useranswers[count][0] = groupoptions.getSelection().getActionCommand();\par
+            \}\par
+            \par
+            if (count == 8) \{\par
+                next.setEnabled(false);\par
+                submit.setEnabled(true);\par
+            \}\par
+            \par
+            count++;\par
+            start(count);\par
+        \} else if (ae.getSource() == lifeline) \{\par
+            if (count == 2 || count == 4 || count == 6 || count == 8 || count == 9) \{\par
+                opt2.setEnabled(false);\par
+                opt3.setEnabled(false);\par
+            \} else \{\par
+                opt1.setEnabled(false);\par
+                opt4.setEnabled(false);\par
+            \}\par
+            lifeline.setEnabled(false);\par
+        \} else if (ae.getSource() == submit) \{\par
+            ans_given = 1;\par
+            if (groupoptions.getSelection() == null) \{\par
+                useranswers[count][0] = "";\par
+            \} else \{\par
+                useranswers[count][0] = groupoptions.getSelection().getActionCommand();\par
+            \}\par
+\par
+            for (int i = 0; i < useranswers.length; i++) \{\par
+                if (useranswers[i][0].equals(answers[i][1])) \{\par
+                    score += 10;\par
+                \} else \{\par
+                    score += 0;\par
+                \}\par
+            \}\par
+            setVisible(false);\par
+            new Score(name, score);\par
+        \}\par
+    \}\par
+    \par
+\par
+     public void paint(Graphics g) \{\par
+        super.paint(g);\par
+        \par
+        String time = "Time left - " + timer + " seconds"; // 15\par
+        g.setColor(Color.RED);\par
+        g.setFont(new Font("Tahoma", Font.BOLD, 20));\par
+        \par
+        if (timer > 0) \{ \par
+            g.drawString(time, 950, 500);\par
+        \} else \{\par
+            g.drawString("Times up!!", 1100, 500);\par
+        \}\par
+        \par
+        timer--; // 14\par
+        \par
+        try \{\par
+            Thread.sleep(1000);\par
+            repaint();\par
+        \} catch (Exception e) \{\par
+            e.printStackTrace();\par
+        \}\par
+        \par
+        if (ans_given == 1) \{\par
+            ans_given = 0;\par
+            timer = 15;\par
+        \} else if (timer < 0) \{\par
+            timer = 15;\par
+            opt1.setEnabled(true);\par
+            opt2.setEnabled(true);\par
+            opt3.setEnabled(true);\par
+            opt4.setEnabled(true);\par
+            \par
+            if (count == 8) \{\par
+                next.setEnabled(false);\par
+                submit.setEnabled(true);\par
+            \}\par
+            if (count == 9) \{ // submit button\par
+                if (groupoptions.getSelection() == null) \{\par
+                   useranswers[count][0] = "";\par
+                \} else \{\par
+                    useranswers[count][0] = groupoptions.getSelection().getActionCommand();\par
+                \}\par
+                \par
+                for (int i = 0; i < useranswers.length; i++) \{\par
+                    if (useranswers[i][0].equals(answers[i][1])) \{\par
+                        score += 10;\par
+                    \} else \{\par
+                        score += 0;\par
+                    \}\par
+                \}\par
+                setVisible(false);\par
+                new Score(name, score);\par
+            \} else \{ // next button\par
+                if (groupoptions.getSelection() == null) \{\par
+                   useranswers[count][0] = "";\par
+                \} else \{\par
+                    useranswers[count][0] = groupoptions.getSelection().getActionCommand();\par
+                \}\par
+                count++; // 0 // 1\par
+                start(count);\par
+            \}\par
+        \}\par
+     \}\par
+        \par
+\par
+    public void start(int count) \{\par
+        qno.setText("" + (count + 1) + ". ");\par
+        question.setText(questions[count][0]);\par
+        opt1.setText(questions[count][1]);\par
+       opt1.setActionCommand(questions[count][1]);\par
+        \par
+        opt2.setText(questions[count][2]);\par
+        opt2.setActionCommand(questions[count][2]);\par
+        \par
+        opt3.setText(questions[count][3]);\par
+       opt3.setActionCommand(questions[count][3]);\par
+        \par
+        opt4.setText(questions[count][4]);\par
+       opt4.setActionCommand(questions[count][4]);\par
+           groupoptions.clearSelection();\par
+    \}\par
+    \par
+    public static void main (String[] args) \{\par
+        new Quiz (user);\par
+    \}\par
+\}\par
+}
+ 
